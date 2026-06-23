@@ -151,14 +151,9 @@ html,body{height:100%;overflow:hidden;background:#f0f4f8;font-family:-apple-syst
       <div id="install-btn-wrap" style="display:none;margin:10px 16px 0">
         <button onclick="doInstall()" class="btn btn-primary" style="margin:0;width:100%">📲 Installer l'application</button>
       </div>
-      <div style="text-align:right;padding:6px 16px 0;font-size:11px;color:var(--gray)">v4</div>
+      <div style="text-align:right;padding:6px 16px 0;font-size:11px;color:var(--gray)">v5</div>
       <div class="stitle">Mes états des lieux</div>
-      <div class="card" id="edl-list-card">
-        <div class="empty-state" id="empty-msg">
-          <div class="big">📋</div>
-          <p>Aucun état des lieux<br>Créez-en un ci-dessous</p>
-        </div>
-      </div>
+      <div class="card" id="edl-list-card"></div>
       <div class="stitle">Nouveau</div>
       <div class="card">
         <div class="mbtn" onclick="newEDL('entree')">
@@ -348,14 +343,10 @@ window.addEventListener('DOMContentLoaded',()=>{
 function renderHome(){
   const list = allEDL();
   const card = document.getElementById('edl-list-card');
-  const empty = document.getElementById('empty-msg');
   if(!list.length){
-    empty.style.display='block';
-    card.innerHTML='';
-    card.appendChild(empty);
+    card.innerHTML = '<div class="empty-state"><div class="big">📋</div><p>Aucun état des lieux<br>Créez-en un ci-dessous</p></div>';
     return;
   }
-  empty.style.display='none';
   card.innerHTML = list.slice().reverse().map(e=>{
     const ico = e.type==='entree'?'🔑':'🚪';
     const bg  = e.type==='entree'?'#EBF5FB':'#FDEBD0';
